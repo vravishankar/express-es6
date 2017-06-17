@@ -1,0 +1,22 @@
+{
+  "name": "express-es6",
+  "version": "1.0.0",
+  "description": "Express Application using ES6",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vravishankar/express-es6.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "V Ravi Shankar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vravishankar/express-es6/issues"
+  },
+  "homepage": "https://github.com/vravishankar/express-es6#readme"
+}
