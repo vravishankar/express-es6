@@ -1,3 +1,3 @@
 # Express application using ES6
-## 1. Sccaffolding
+## 1. Scaffolding
 ## 2. Development
