@@ -16,3 +16,79 @@ mkdir src
 mkdir dist
 ```
 ## 3. Development
+#### 3.1 Install Gulp
+```sh
+npm install -g gulp-cli
+npm install --save-dev gulp
+```
+#### 3.2 Install Babel
+```sh
+npm install --save-dev babel-register
+npm install --save-dev babel-preset-2015
+npm install --save-dev babel-preset-stage-0
+```
+_.babelrc_
+```json
+{
+    "presets": ["es2015","stage-0"]
+}
+```
+#### 3.3 Install Gulp Plugins
+```sh
+npm install --save-dev gulp-load-plugins
+npm install --save-dev gulp-babel
+npm install --save-dev gulp-util
+npm install --save-dev gulp-pug
+npm install --save-dev gulp-newer
+npm install --save-dev del
+```
+#### 3.4 Install Express & Middlewares
+```sh
+npm install --save express
+npm install --save body-parser
+```
+#### 4 Build Gulp Config File
+```javascript
+import gulp from 'gulp'
+
+import gulpLoadPlugins from 'gulp-load-plugins' // <== Load all the plugins without imports
+
+import del from 'del'
+import path from 'path'
+
+const plugins = gulpLoadPlugins()
+
+const bases = {
+    src: 'src/',
+    dist: 'dist/'
+}
+
+const sources = {
+    env: ['./package.json','./.gitignore','./.env'],
+    templates: ['templates/**/*.pug'],
+    styles: ['sass/**/*.scss'],
+    scripts: ['scripts/**/*.js']
+}
+
+// Clean Task
+gulp.task('clean', () => {
+    del.sync(['dist/**','dist/.*', '!dist'])
+})
+
+// Copy Task
+gulp.task('copy-env', () => {
+    gulp.src(sources.env)
+    .pipe(plugins.newer(bases.dist))
+    .pipe(gulp.dest(bases.dist))
+})
+
+// HTML Task
+gulp.task('html', () => {
+    gulp.src(sources.templates, {cwd: bases.src})
+    .pipe(pug())
+    .pipe(plugins.newer(bases.dist))
+    .pipe(gulp.dest(bases.dist))
+})
+
+gulp.task('default',['clean','copy-env','html'])
+```
