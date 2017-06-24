@@ -21,7 +21,40 @@ mkdir dist
 npm install -g gulp-cli
 npm install --save-dev gulp
 ```
-#### 3.2 Install Babel
+#### 3.2 Install Lint (ESLINT)
+```sh
+npm install --save-dev gulp-eslint
+npm install -g install-peerdeps
+install-peerdeps --dev eslint-config-airbnb
+```
+#### 3.3 Install Sass
+```sh
+npm install --save-dev gulp-sass
+npm install --save-dev gulp-sourcemaps
+npm install --save-dev gulp-autoprefixer
+```
+```javascript
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
+
+// ... variables
+var autoprefixerOptions = {
+  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+};
+
+gulp.task('sass', function () {
+  return gulp
+    .src(input)
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions).on('error', sass.logError))
+    .pipe(sourcemaps.write())
+    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(gulp.dest(output));
+});
+```
+#### 3.4 Install Babel
 ```sh
 npm install --save-dev babel-register
 npm install --save-dev babel-preset-2015
